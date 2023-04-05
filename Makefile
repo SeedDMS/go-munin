@@ -30,8 +30,12 @@ run:
 dist: clean
 	rm -rf ${PKGNAME}-${VERSION}
 	mkdir ${PKGNAME}-${VERSION}
-	cp -r *.go Makefile go.mod ${PKGNAME}-${VERSION}
+	cp -r *.go Makefile go.mod LICENSE ${PKGNAME}-${VERSION}
 	tar czvf ${PKGNAME}-${VERSION}.tar.gz ${PKGNAME}-${VERSION}
 	rm -rf ${PKGNAME}-${VERSION}
+
+debian: dist
+	mv ${PKGNAME}-${VERSION}.tar.gz ../${PKGNAME}_${VERSION}.orig.tar.gz
+	debuild
 
 .PHONY: build test 
