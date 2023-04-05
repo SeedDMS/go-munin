@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --builddirectory=_build --buildsystem=golang --with=golang
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p $(CURDIR)/debian/seeddms-munin/usr/share/munin/plugins
+	mv $(CURDIR)/debian/seeddms-munin/usr/bin/munin $(CURDIR)/debian/seeddms-munin/usr/share/munin/plugins/seeddms
